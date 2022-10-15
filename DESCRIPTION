@@ -1,0 +1,17 @@
+Package: PolygonSoup
+Type: Package
+Title: What the Package Does in One 'Title Case' Line
+Version: 0.0.9000
+Author: Your Name
+Maintainer: Your Name <your@email.com>
+Description: One paragraph description of what the package does as one
+        or more full sentences.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.9), rgl, gmp, data.table
+Suggests: misc3d
+LinkingTo: Rcpp, RcppEigen, BH, RcppCGAL
+Depends: 
+    R (>= 2.10)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.1
