@@ -25,7 +25,7 @@ vf <- readMeshFile(
   system.file("extdata", "beethoven.ply", package = "PolygonSoup")
 )
 mesh <- Mesh(
-  vf[["vertices"]], vf[["faces"]], normals = TRUE, clean = TRUE
+  vf[["vertices"]], vf[["faces"]], normals = TRUE
 )
 rglmesh <- toRGL(mesh)
 open3d(windowRect = c(50, 50, 562, 562))
