@@ -374,6 +374,8 @@ toRGL <- function(mesh, ...){
 #' @examples
 #' \donttest{library(PolygonSoup)
 #' library(rgl)
+#' 
+#' # we triangulate the truncated icosahedron mesh
 #' mesh <- Mesh(
 #'   mesh = truncatedIcosahedron,
 #'   triangulate = TRUE, normals = FALSE
@@ -382,7 +384,24 @@ toRGL <- function(mesh, ...){
 #' tmesh <- toRGL(mesh)
 #' open3d(windowRect = c(50, 50, 562, 562), zoom = 0.9)
 #' shade3d(tmesh, color = "gold")
-#' plotEdges(mesh[["vertices"]], mesh[["edges0"]], color = "navy")}
+#' # we plot the edges given in `mesh[["edges0"]]`; these are the 
+#' # edges of the mesh before the triangulation
+#' plotEdges(mesh[["vertices"]], mesh[["edges0"]], color = "navy")
+#' 
+#' # we triangulate the pentagrammic prism mesh
+#' mesh <- Mesh(
+#'   mesh = pentagrammicPrism,
+#'   triangulate = TRUE, normals = FALSE
+#' )
+#' # now we can plot the pentagrammic prism
+#' tmesh <- toRGL(mesh)
+#' open3d(windowRect = c(50, 50, 562, 562), zoom = 0.9)
+#' shade3d(tmesh, color = "navy")
+#' # we plot the exterior edges only, given in `mesh[["exteriorEdges"]]`
+#' plotEdges(
+#'   mesh[["vertices"]], mesh[["exteriorEdges"]], color = "gold",
+#'   tubesRadius = 0.02, spheresRadius = 0.02
+#' )}
 plotEdges <- function(
 		vertices,
 		edges,
