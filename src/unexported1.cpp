@@ -23,41 +23,6 @@ std::string q2str(CGAL::Gmpq r) {
   return snumer + "/" + sdenom;
 }
 
-// template <typename MeshT>
-// MeshT removeDegenerateFaces(MeshT mesh) {  // triangular faces only
-//   for(typename MeshT::Face_index fd : mesh.faces()) {
-//     if(PMP::is_degenerate_triangle_face(fd, mesh)) {
-//       mesh.remove_face(fd);
-//     }
-//   }
-//   const size_t nrmfs = mesh.number_of_removed_faces();
-//   if(nrmfs > 0) {
-//     const std::string endmsg =
-//         nrmfs == 1 ? "one degenerate face"
-//                    : (std::to_string(nrmfs) + "degenerate faces");
-//     const std::string msg = "Removed " + endmsg + ".\n";
-//     Message(msg);
-//     mesh.collect_garbage();
-//   }
-//   return mesh;
-// }
-// 
-// template Mesh3 removeDegenerateFaces<Mesh3>(Mesh3);
-
-// Rcpp::NumericMatrix points3_to_matrix(std::vector<Point3> points) {
-//   const size_t nvertices = points.size();
-//   Rcpp::NumericMatrix Vertices(3, nvertices);
-//   for(size_t i = 0; i != nvertices; i++) {
-//     Rcpp::NumericVector col_i(3);
-//     const Point3 vertex = points[i];
-//     col_i(0) = vertex.x();
-//     col_i(1) = vertex.y();
-//     col_i(2) = vertex.z();
-//     Vertices(Rcpp::_, i) = col_i;
-//   }
-//   return Vertices;
-// }
-
 template <typename PointT>
 std::vector<PointT> matrix_to_points3(const Rcpp::NumericMatrix M) {
   const size_t npoints = M.ncol();

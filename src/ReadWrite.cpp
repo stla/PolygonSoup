@@ -130,5 +130,3 @@ void writeFile(const std::string filename,
     Rcpp::stop("Failed to write file.");
   }
 }
-
-//{}
