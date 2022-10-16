@@ -3,3 +3,4 @@
 ^\.github$
 ^inst/essais$
 ^inst/gifs$
+^data-raw$
