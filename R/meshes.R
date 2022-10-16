@@ -134,13 +134,16 @@ checkMesh <- function(vertices, faces, gmp, aslist){
 #' @param normals Boolean, whether to compute the normals
 #'
 #' @return A list giving the vertices, the edges, the faces of the mesh, the
-#'   exterior edges, the exterior vertices and optionally the normals. This
-#'   list has two additional components \code{edges0} and \code{normals0} if
-#'   \code{triangulate=TRUE}, giving the edges and the normals before the
-#'   triangulation, unless the mesh is already triangulated, in which case
-#'   the \code{triangulate} option is ignored.
+#'   exterior edges, the exterior vertices and optionally the normals. 
+#'   If \code{triangulate=TRUE}, this list has two additional components 
+#'   \code{edges0} and \code{normals0} giving the edges and the normals 
+#'   before the triangulation, unless the mesh is already triangulated, 
+#'   in which case the \code{triangulate} option is ignored.
 #'
 #' @export
+#' 
+#' @seealso See \code{\link{plotEdges}} for more details about the edges 
+#'   returned by this function.
 #'
 #' @importFrom gmp as.bigq asNumeric is.matrixZQ
 #'
@@ -180,7 +183,7 @@ checkMesh <- function(vertices, faces, gmp, aslist){
 #' open3d(windowRect = c(50, 50, 562, 562))
 #' shade3d(tmesh2, color = "blue", back = "cull")
 #'
-#' # illustration of the `clean` option ####
+#' # illustration of the cleaning feature ####
 #' # we construct a mesh with a lot of duplicated vertices
 #' library(misc3d) # to compute a mesh of an isosurface
 #' a <- 0.94; mu <- 0.56; c <- 0.34 # cyclide parameters
@@ -195,7 +198,7 @@ checkMesh <- function(vertices, faces, gmp, aslist){
 #' voxel <- array(with(g, f(x, y, z, a, c, mu)), c(45, 45, 30))
 #' cont <- computeContour3d(voxel, level = 0, x = x, y = y, z = z)
 #' ids <- matrix(1:nrow(cont), ncol = 3, byrow = TRUE)
-#' # run the `Mesh` function with `clean=TRUE`
+#' # run the `Mesh` function 
 #' mesh <- Mesh(cont, ids, normals = TRUE)
 #' # plot the cyclide
 #' tmesh <- toRGL(mesh)
