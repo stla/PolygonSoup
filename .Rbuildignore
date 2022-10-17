@@ -4,3 +4,4 @@
 ^inst/essais$
 ^inst/gifs$
 ^data-raw$
+^cran-comments\.md$
