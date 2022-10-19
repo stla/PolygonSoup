@@ -1,3 +1,8 @@
+# PolygonSoup 1.0.1.9000
+
+Fixed `writeMeshFile`.
+
+
 # PolygonSoup 1.0.1
 
 Enabled C++ 17.

@@ -21,10 +21,10 @@ std::pair<std::vector<std::vector<int>>, bool> list_to_faces2(
   for(size_t i = 0; i < nfaces; i++) {
     Rcpp::IntegerVector face_rcpp = Rcpp::as<Rcpp::IntegerVector>(L(i));
     std::vector<int> face(face_rcpp.begin(), face_rcpp.end());
-    std::transform(
-      face.begin(), face.end(), face.begin(),
-	  std::bind(std::minus<int>(), std::placeholders::_1, 1)
-    );
+//     std::transform(
+//       face.begin(), face.end(), face.begin(),
+// 	  std::bind(std::minus<int>(), std::placeholders::_1, 1)
+//     );
     faces.emplace_back(face);
     triangle = triangle && (face.size() == 3);
   }

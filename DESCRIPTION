@@ -1,7 +1,7 @@
 Type: Package
 Package: PolygonSoup
 Title: Mesh from Polygon Soup
-Version: 1.0.1
+Version: 1.0.1.9000
 Authors@R: person("Stéphane", "Laurent", email = "laurent_step@outlook.fr", role = c("aut", "cre"))
 Maintainer: Stéphane Laurent <laurent_step@outlook.fr>
 Description: Allows to get a consistent 3D mesh from a polygon soup, that
