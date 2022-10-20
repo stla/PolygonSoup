@@ -26,92 +26,92 @@ print.cgalMesh <- function(x, ...){
 #' @importFrom gmp is.bigq is.matrixZQ
 #' @importFrom data.table uniqueN
 #' @noRd
-checkMesh <- function(vertices, faces, gmp, aslist){
-	if(gmp){
-		if(!is.matrixZQ(vertices) || ncol(vertices) != 3L){
-			stop("The `vertices` argument must be a matrix with three columns.")
+checkMesh <- function(vertices, faces, gmp, aslist) {
+	if(gmp) {
+		if(!is.matrixZQ(vertices) || ncol(vertices) != 3L) {
+			stop("The `vertices` argument must be a `bigq` matrix with three columns.")
 		}
 		stopifnot(is.bigq(vertices))
 		vertices <- as.character(vertices)
-	}else{
-		if(!is.matrix(vertices) || ncol(vertices) != 3L){
+	} else {
+		if(!is.matrix(vertices) || ncol(vertices) != 3L) {
 			stop("The `vertices` argument must be a matrix with three columns.")
 		}
 		stopifnot(is.numeric(vertices))
 		storage.mode(vertices) <- "double"
 	}
-	if(anyNA(vertices)){
+	if(anyNA(vertices)) {
 		stop("Found missing values in `vertices`.")
 	}
 	homogeneousFaces <- FALSE
 	isTriangle       <- FALSE
 	toRGL            <- FALSE
-	if(is.matrix(faces)){
-		if(ncol(faces) < 3L){
+	if(is.matrix(faces)) {
+		if(ncol(faces) < 3L) {
 			stop("Faces must be given by at least three indices.")
 		}
 		storage.mode(faces) <- "integer"
-		if(anyNA(faces)){
+		if(anyNA(faces)) {
 			stop("Found missing values in `faces`.")
 		}
-		if(any(faces < 1L)){
+		if(any(faces < 1L)) {
 			stop("Faces cannot contain indices lower than 1.")
 		}
-		if(any(faces > nrow(vertices))){
+		if(any(faces > nrow(vertices))) {
 			stop("Faces cannot contain indices higher than the number of vertices.")
 		}
 		homogeneousFaces <- ncol(faces)
-		if(homogeneousFaces %in% c(3L, 4L)){
+		if(homogeneousFaces %in% c(3L, 4L)) {
 			isTriangle <- homogeneousFaces == 3L
 			toRGL <- homogeneousFaces
 		}
-		if(aslist){
+		if(aslist) {
 			faces <- lapply(1L:nrow(faces), function(i) faces[i, ] - 1L)
-		}else{
+		} else {
 			faces <- t(faces - 1L)
 		}
-	}else if(is.list(faces)){
+	}else if(is.list(faces)) {
 		check <- all(vapply(faces, isAtomicVector, logical(1L)))
-		if(!check){
+		if(!check) {
 			stop("The `faces` argument must be a list of integer vectors.")
 		}
 		check <- any(vapply(faces, anyNA, logical(1L)))
-		if(check){
+		if(check) {
 			stop("Found missing values in `faces`.")
 		}
 		faces <- lapply(faces, function(x) as.integer(x) - 1L)
 		sizes <- lengths(faces)
-		if(any(sizes < 3L)){
+		if(any(sizes < 3L)) {
 			stop("Faces must be given by at least three indices.")
 		}
-		check <- any(vapply(faces, function(f){
+		check <- any(vapply(faces, function(f) {
 							any(f < 0L) || any(f >= nrow(vertices))
 						}, logical(1L)))
-		if(check){
+		if(check) {
 			stop(
 					"Faces cannot contain indices lower than 1 or higher than the ",
 					"number of vertices."
 			)
 		}
 		usizes <- uniqueN(sizes)
-		if(usizes == 1L){
+		if(usizes == 1L) {
 			homogeneousFaces <- sizes[1L]
 			isTriangle <- homogeneousFaces == 3L
-			if(homogeneousFaces %in% c(3L, 4L)){
+			if(homogeneousFaces %in% c(3L, 4L)) {
 				toRGL <- homogeneousFaces
 			}
-		}else if(usizes == 2L && all(sizes %in% c(3L, 4L))){
+		}else if(usizes == 2L && all(sizes %in% c(3L, 4L))) {
 			toRGL <- 34L
 		}
-	}else{
+	} else {
 		stop("The `faces` argument must be a list or a matrix.")
 	}
 	list(
-			vertices = t(vertices),
-			faces = faces,
-			homogeneousFaces = homogeneousFaces,
-			isTriangle = isTriangle,
-			toRGL = toRGL
+			"vertices"         = t(vertices),
+			"faces"            = faces,
+			"homogeneousFaces" = homogeneousFaces,
+			"isTriangle"       = isTriangle,
+			"toRGL"            = toRGL
 	)
 }
 
