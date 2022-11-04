@@ -84,14 +84,14 @@ MeshT soup2mesh(std::vector<PointT> points,
                 std::vector<std::vector<int>> faces,
                 const bool clean,
                 const bool triangulate) {
+  if(clean) {
+    PMP::repair_polygon_soup(points, faces);
+  }
   bool success = PMP::orient_polygon_soup(points, faces);
   if(success) {
     Message("Successful polygon orientation.");
   } else {
     Message("Polygon orientation failed.");
-  }
-  if(clean) {
-    PMP::repair_polygon_soup(points, faces);
   }
   MeshT mesh;
   PMP::polygon_soup_to_polygon_mesh(points, faces, mesh);
